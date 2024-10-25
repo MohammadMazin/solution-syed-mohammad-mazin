@@ -22,8 +22,20 @@ let p1Turn = true;
 // 5- switch turn
 // 6- loop
 
+function displayPosition(d1, d2) {
+  console.log(
+    `Turn: ${p1Turn ? "p1" : "p2"}--- d1: ${d1},  d2: ${d2}, p1: ${
+      players.p2[0] + 1
+    },${players.p2[1] + 1}, p2: ${players.p2[0] + 1},${players.p2[1] + 1}`
+  );
+  console.log();
+}
+
 function handleTurn(p1Turn, d1, d2) {
+  // 2- check players turn
   let player = p1Turn ? players.p1 : players.p2;
+
+  // 3- check movement conditions
   if (d1 === d2) {
     const [row] = player;
     player = [row + 2, d1 - 1];
@@ -38,19 +50,14 @@ function handleTurn(p1Turn, d1, d2) {
 }
 
 function main() {
-  // 1- roll dice
   while (true) {
+    // 1- roll dice
     const d1 = Math.ceil(Math.random() * 6);
     const d2 = Math.ceil(Math.random() * 6);
 
     handleTurn(p1Turn, d1, d2);
 
-    console.log(
-      `Turn: ${p1Turn ? "p1" : "p2"}--- d1: ${d1},  d2: ${d2}, p1: ${
-        players.p2[0] + 1
-      },${players.p2[1] + 1}, p2: ${players.p2[0] + 1},${players.p2[1] + 1}`
-    );
-    console.log();
+    displayPosition(d1, d2);
 
     // 4- check win/lose condition
     if (p1Turn && players.p1[0] >= 4) {
